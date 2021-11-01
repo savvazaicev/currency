@@ -5,7 +5,7 @@ abstract class HomeRoutingEvent extends Equatable {
 
   factory HomeRoutingEvent.settings() = NavigateToSettings;
 
-  factory HomeRoutingEvent.home() = NavigateToCurrencyList;
+  factory HomeRoutingEvent.currencyList() = NavigateToCurrencyList;
 
   @override
   List<Object> get props => [];

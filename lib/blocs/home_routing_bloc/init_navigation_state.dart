@@ -3,8 +3,6 @@ import 'package:equatable/equatable.dart';
 abstract class HomeRoutingState extends Equatable {
   const HomeRoutingState();
 
-  // factory HomeRoutingState.initial() = HomeRoutingInitial;
-
   factory HomeRoutingState.settings() = SettingsPageState;
 
   factory HomeRoutingState.currencyList() = CurrencyListPageState;
@@ -12,8 +10,6 @@ abstract class HomeRoutingState extends Equatable {
   @override
   List<Object> get props => [];
 }
-
-// class HomeRoutingInitial extends HomeRoutingState {}
 
 class SettingsPageState extends HomeRoutingState {}
 

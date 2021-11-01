@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:currency/data/currency.dart';
-import 'package:currency/data/currency_repository.dart';
+import 'package:currency/data/currency_list/currency_item_model.dart';
+import 'package:currency/data/currency_list/currency_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'currency_list_event.dart';
@@ -17,7 +17,23 @@ class CurrencyListBloc extends Bloc<CurrencyListEvent, CurrencyListState> {
 
   Future<void> _loadCurrencyList(
       LoadCurrencyList event, Emitter<CurrencyListState> emit) async {
+    emit(CurrencyListState.loading());
+
+    //TODO extract to interactor
     final currencies = await repository.loadCurrencies(DateTime.now());
-    emit(CurrencyListState.loaded(currencies));
+    final yesterdayCurrencies =
+        await repository.loadCurrencies(DateTime.now().add(Duration(days: -1)));
+    final currencyItems = currencies
+        .map((currency) => CurrencyItemModel(
+            currency,
+            yesterdayCurrencies
+                    .firstWhere((yesterdayCurrency) =>
+                        yesterdayCurrency.curAbbreviation ==
+                        currency.curAbbreviation)
+                    .curOfficialRate ??
+                0))
+        .toList();
+
+    emit(CurrencyListState.loaded(currencyItems));
   }
 }

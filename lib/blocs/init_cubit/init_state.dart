@@ -1,3 +1,4 @@
+import 'package:currency/data/currency_list/currency.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class InitState extends Equatable {
@@ -7,7 +8,8 @@ abstract class InitState extends Equatable {
 
   factory InitState.inProgress() = InitInProgress;
 
-  factory InitState.initialized(List<String> enabledCurrencies) = Initialized;
+  factory InitState.initialized(
+      List<Currency> currencies, List<String> enabledCurrencies) = Initialized;
 
   factory InitState.error() = InitError;
 
@@ -20,9 +22,10 @@ class InitInitial extends InitState {}
 class InitInProgress extends InitState {}
 
 class Initialized extends InitState {
+  final List<Currency> currencies;
   final List<String> enabledCurrencies;
 
-  Initialized(this.enabledCurrencies);
+  Initialized(this.currencies, this.enabledCurrencies);
 
   @override
   List<Object> get props => [enabledCurrencies];

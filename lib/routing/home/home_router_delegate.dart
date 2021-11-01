@@ -1,6 +1,6 @@
 import 'package:currency/blocs/currency_list_bloc/currency_list_bloc.dart';
 import 'package:currency/blocs/home_routing_bloc/index.dart';
-import 'package:currency/data/currency_repository.dart';
+import 'package:currency/data/currency_list/currency_repository.dart';
 import 'package:currency/routing/home/routes.dart';
 import 'package:currency/widgets/currency_list/currency_list_page.dart';
 import 'package:currency/widgets/settings/settings_page.dart';
@@ -23,7 +23,6 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
           key: navigatorKey,
           pages: [
             if (state is CurrencyListPageState)
-              //TODO Не загружается список валют
               MaterialPage(
                   child: BlocProvider(
                 create: (context) =>
@@ -31,13 +30,6 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
                 child: CurrencyListPage(),
               )),
             if (state is SettingsPageState) MaterialPage(child: SettingsPage()),
-            // if (state is HomeRoutingInitial)
-            //   MaterialPage(
-            //       child: Scaffold(
-            //           body: Center(
-            //               child: CircularProgressIndicator(
-            //     valueColor: AlwaysStoppedAnimation(Colors.blue),
-            //   ))))
           ],
           onPopPage: (route, result) {
             if (!route.didPop(result)) return false;
@@ -51,8 +43,8 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
   }
 
   @override
-  Future<void> setNewRoutePath(HomeRoutePath configuration) {
+  Future<void> setNewRoutePath(HomeRoutePath configuration) async {
     // TODO: implement setNewRoutePath
-    throw UnimplementedError();
+    assert(false);
   }
 }
