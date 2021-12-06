@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:currency/data/currency_list/currency_item_model.dart';
-import 'package:currency/data/currency_list/currency_repository.dart';
+import 'package:currency/data/currency/currency_item_model.dart';
+import 'package:currency/data/currency/currency_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'currency_list_event.dart';

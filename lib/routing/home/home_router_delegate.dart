@@ -1,6 +1,6 @@
 import 'package:currency/blocs/currency_list_bloc/currency_list_bloc.dart';
 import 'package:currency/blocs/home_routing_bloc/index.dart';
-import 'package:currency/data/currency_list/currency_repository.dart';
+import 'package:currency/data/currency/currency_repository.dart';
 import 'package:currency/routing/home/routes.dart';
 import 'package:currency/widgets/currency_list/currency_list_page.dart';
 import 'package:currency/widgets/settings/settings_page.dart';

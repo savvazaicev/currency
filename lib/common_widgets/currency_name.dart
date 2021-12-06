@@ -1,4 +1,4 @@
-import 'package:currency/data/currency_list/currency.dart';
+import 'package:currency/data/currency/currency.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyName extends StatelessWidget {

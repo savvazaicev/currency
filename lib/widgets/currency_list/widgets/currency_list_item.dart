@@ -1,5 +1,5 @@
 import 'package:currency/common_widgets/currency_name.dart';
-import 'package:currency/data/currency_list/currency_item_model.dart';
+import 'package:currency/data/currency/currency_item_model.dart';
 import 'package:currency/widgets/currency_list/widgets/center_text.dart';
 import 'package:flutter/material.dart';
 

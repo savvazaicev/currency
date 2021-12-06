@@ -1,4 +1,4 @@
-import 'package:currency/data/currency_list/currency.dart';
+import 'package:currency/data/currency/currency.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class InitState extends Equatable {

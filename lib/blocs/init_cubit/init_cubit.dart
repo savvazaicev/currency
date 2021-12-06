@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:currency/blocs/init_cubit/index.dart';
-import 'package:currency/data/currency_list/currency_repository.dart';
+import 'package:currency/data/currency/currency_repository.dart';
 import 'package:currency/utils/pref_helper.dart';
 
 class InitCubit extends Cubit<InitState> {

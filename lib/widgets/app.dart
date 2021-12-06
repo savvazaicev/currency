@@ -1,5 +1,5 @@
 import 'package:currency/blocs/init_cubit/index.dart';
-import 'package:currency/data/currency_list/currency_repository.dart';
+import 'package:currency/data/currency/currency_repository.dart';
 import 'package:currency/widgets/init_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
