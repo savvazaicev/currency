@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:currency/data/currency/currency.dart';
 import 'package:currency/data/currency/currency_item_model.dart';
 import 'package:currency/data/currency/currency_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -27,9 +28,11 @@ class CurrencyListBloc extends Bloc<CurrencyListEvent, CurrencyListState> {
         .map((currency) => CurrencyItemModel(
             currency,
             yesterdayCurrencies
-                    .firstWhere((yesterdayCurrency) =>
-                        yesterdayCurrency.curAbbreviation ==
-                        currency.curAbbreviation)
+                    .firstWhere(
+                        (yesterdayCurrency) =>
+                            yesterdayCurrency.curAbbreviation ==
+                            currency.curAbbreviation,
+                        orElse: () => Currency.empty())
                     .curOfficialRate ??
                 0))
         .toList();

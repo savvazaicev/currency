@@ -30,5 +30,7 @@ class Currency {
   factory Currency.fromJson(Map<String, dynamic> json) =>
       _$CurrencyFromJson(json);
 
+  factory Currency.empty() => Currency(null, null, null, null, null, null);
+
   Map<String, dynamic> toJson() => _$CurrencyToJson(this);
 }
