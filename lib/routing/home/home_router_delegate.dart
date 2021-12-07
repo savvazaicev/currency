@@ -8,6 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../main.dart';
+
 final GlobalKey<NavigatorState> homeNavigatorKey = GlobalKey<NavigatorState>();
 
 class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
@@ -25,8 +27,9 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
             if (state is CurrencyListPageState)
               MaterialPage(
                   child: BlocProvider(
-                create: (context) =>
-                    CurrencyListBloc(repository: CurrencyRepository()),
+                create: (context) => CurrencyListBloc(
+                    repository: rootScope.resolve<CurrencyRepository>(
+                        named: "currencyRepository")),
                 child: CurrencyListPage(),
               )),
             if (state is SettingsPageState) MaterialPage(child: SettingsPage()),
