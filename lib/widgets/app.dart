@@ -1,5 +1,6 @@
 import 'package:currency/blocs/init_cubit/index.dart';
 import 'package:currency/data/currency/currency_repository.dart';
+import 'package:currency/main.dart';
 import 'package:currency/widgets/init_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,9 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider(
-        create: (_) => InitCubit(repository: CurrencyRepository()),
+        create: (_) => InitCubit(
+            repository: rootScope.resolve<CurrencyRepository>(
+                named: "currencyRepository")),
         child: InitWidget(),
       ),
     );

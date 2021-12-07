@@ -23,6 +23,7 @@ dependencies:
   retrofit: ^3.0.0
   dio: ^4.0.4
   logger: ^1.1.0
+  cherrypick: ^1.0.0
 
 dev_dependencies:
   flutter_test:
