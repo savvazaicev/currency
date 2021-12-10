@@ -1,9 +1,11 @@
 import 'package:currency/blocs/currency_list_bloc/currency_list_bloc.dart';
 import 'package:currency/blocs/home_routing_bloc/index.dart';
 import 'package:currency/data/currency/currency_repository.dart';
+import 'package:currency/network/currency/rest_client.dart';
 import 'package:currency/routing/home/routes.dart';
 import 'package:currency/widgets/currency_list/currency_list_page.dart';
 import 'package:currency/widgets/settings/settings_page.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +31,9 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
                   child: BlocProvider(
                 create: (context) => CurrencyListBloc(
                     repository: rootScope.resolve<CurrencyRepository>(
-                        named: "currencyRepository")),
+                        named: "currencyRepository"),
+                    client: RestClient(Dio()))
+                  ..add(CurrencyListEvent.load()),
                 child: CurrencyListPage(),
               )),
             if (state is SettingsPageState) MaterialPage(child: SettingsPage()),

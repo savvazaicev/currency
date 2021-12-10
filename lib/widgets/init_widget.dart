@@ -1,9 +1,11 @@
-import 'package:currency/blocs/home_routing_bloc/init_navigation_bloc.dart';
+import 'package:currency/blocs/home_routing_bloc/home_routing_bloc.dart';
 import 'package:currency/blocs/init_cubit/index.dart';
 import 'package:currency/common_widgets/circular_progress.dart';
 import 'package:currency/data/providers/currency_data.dart';
 import 'package:currency/data/providers/settings_data.dart';
+import 'package:currency/network/currency/rest_client.dart';
 import 'package:currency/routing/home/home_router_delegate.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +23,9 @@ class _InitWidgetState extends State<InitWidget> {
   @override
   void initState() {
     super.initState();
-    context.read<InitCubit>().initApp();
+
+    final client = RestClient(Dio());
+    context.read<InitCubit>().initApp(client);
   }
 
   @override

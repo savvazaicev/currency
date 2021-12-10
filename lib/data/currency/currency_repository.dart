@@ -4,12 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
-class CurrencyRepository {
-  Future<List<Currency>> loadCurrencies(DateTime date) async {
+class CurrencyRepository implements BaseCurrencyRepository {
+  Future<List<Currency>> loadCurrencies(
+      RestClient client, DateTime date) async {
     final dateString = DateFormat("dd.MM.yyyy").format(date);
     final logger = Logger();
 
-    final client = RestClient(Dio());
     return client.getCurrencyList(dateString).catchError((Object obj) {
       switch (obj.runtimeType) {
         case DioError:
@@ -21,4 +21,8 @@ class CurrencyRepository {
       }
     });
   }
+}
+
+abstract class BaseCurrencyRepository {
+  Future<List<Currency>> loadCurrencies(RestClient client, DateTime date);
 }
