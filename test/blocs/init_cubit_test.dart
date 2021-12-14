@@ -4,17 +4,18 @@ import 'package:currency/data/currency/currency_model.dart';
 import 'package:currency/data/currency/currency_remote_data_source.dart';
 import 'package:currency/data/currency/currency_repository.dart';
 import 'package:currency/domain/currency/entities/currency.dart';
+import 'package:currency/network/currency/rest_client.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 
-import '../data/currency_repository_test.mocks.dart';
+import 'init_cubit_test.mocks.dart';
 
-@GenerateMocks([CurrencyRepository, CurrencyRemoteDataSource])
+@GenerateMocks([CurrencyRepository, CurrencyRemoteDataSource, RestClient])
 void main() {
   group("InitCubit", () {
     late InitCubit cubit;
-    //TODO почему-то не генерируются моки
     late MockCurrencyRepository repository;
     late MockCurrencyRemoteDataSource remoteDataSource;
 

@@ -8,7 +8,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../blocs/init_cubit_test.mocks.dart';
 import 'currency_repository_test.mocks.dart';
 
 @GenerateMocks([RestClient, CurrencyRemoteDataSource])
