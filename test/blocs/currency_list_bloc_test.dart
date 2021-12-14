@@ -1,7 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:currency/blocs/currency_list_bloc/currency_list_bloc.dart';
-import 'package:currency/data/currency/currency.dart';
-import 'package:currency/data/currency/currency_repository.dart';
+import 'package:currency/domain/currency/entities/currency.dart';
+import 'package:currency/domain/currency/repositories/currency_repository.dart';
+import 'package:currency/domain/currency/usecases/get_currencies.dart';
 import 'package:currency/network/currency/rest_client.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -19,11 +20,12 @@ void main() {
 
     setUp(() {
       repository = MockBaseCurrencyRepository();
-      bloc = CurrencyListBloc(repository: repository, client: client);
+      bloc = CurrencyListBloc(
+          client: client, getCurrencies: GetCurrencies(repository));
     });
 
     test("initial state is CurrencyListInitial", () {
-      when(repository.loadCurrencies(client, any))
+      when(repository.getCurrencies(client))
           .thenAnswer((_) => Future.value(<Currency>[]));
       expect(bloc.state, CurrencyListInitial());
     });
@@ -41,7 +43,7 @@ CurrencyListBloc buildBlocWithEmptyCurrencyList(
     MockBaseCurrencyRepository repository,
     CurrencyListBloc bloc,
     RestClient client) {
-  when(repository.loadCurrencies(client, any))
+  when(repository.getCurrencies(client))
       .thenAnswer((_) async => Future.value(<Currency>[]));
   return bloc;
 }

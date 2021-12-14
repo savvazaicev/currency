@@ -7,7 +7,7 @@ abstract class CurrencyListState extends Equatable {
 
   factory CurrencyListState.loading() = CurrencyListLoading;
 
-  factory CurrencyListState.loaded(List<CurrencyItemModel> currencies) =
+  factory CurrencyListState.loaded(List<Currency> currencies) =
       CurrencyListLoaded;
 
   @override
@@ -19,7 +19,7 @@ class CurrencyListInitial extends CurrencyListState {}
 class CurrencyListLoading extends CurrencyListState {}
 
 class CurrencyListLoaded extends CurrencyListState {
-  final List<CurrencyItemModel> currencies;
+  final List<Currency> currencies;
 
   CurrencyListLoaded(this.currencies);
 

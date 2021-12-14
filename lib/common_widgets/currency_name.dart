@@ -1,4 +1,4 @@
-import 'package:currency/data/currency/currency.dart';
+import 'package:currency/data/currency/currency_model.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyName extends StatelessWidget {
@@ -7,7 +7,7 @@ class CurrencyName extends StatelessWidget {
     required this.currency,
   }) : super(key: key);
 
-  final Currency currency;
+  final CurrencyModel currency;
 
   @override
   Widget build(BuildContext context) {

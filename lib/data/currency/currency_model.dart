@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'currency.g.dart';
+part 'currency_model.g.dart';
 
 /// Cur_ID : 440
 /// Date : "2021-10-27T00:00:00"
@@ -10,8 +10,8 @@ part 'currency.g.dart';
 /// Cur_OfficialRate : 1.8113
 
 @JsonSerializable()
-class Currency {
-  Currency(this.curID, this.date, this.curAbbreviation, this.curScale,
+class CurrencyModel {
+  CurrencyModel(this.curID, this.date, this.curAbbreviation, this.curScale,
       this.curName, this.curOfficialRate);
 
   @JsonKey(name: 'Cur_ID')
@@ -27,10 +27,11 @@ class Currency {
   @JsonKey(name: 'Cur_OfficialRate')
   final double? curOfficialRate;
 
-  factory Currency.fromJson(Map<String, dynamic> json) =>
-      _$CurrencyFromJson(json);
+  factory CurrencyModel.fromJson(Map<String, dynamic> json) =>
+      _$CurrencyModelFromJson(json);
 
-  factory Currency.empty() => Currency(null, null, null, null, null, null);
+  factory CurrencyModel.empty() =>
+      CurrencyModel(null, null, null, null, null, null);
 
-  Map<String, dynamic> toJson() => _$CurrencyToJson(this);
+  Map<String, dynamic> toJson() => _$CurrencyModelToJson(this);
 }

@@ -1,4 +1,4 @@
-import 'package:currency/data/currency/currency.dart';
+import 'package:currency/data/currency/currency_model.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -9,5 +9,5 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
   @GET("/rates?ondate={date}&periodicity=0")
-  Future<List<Currency>> getCurrencyList(@Path("date") String date);
+  Future<List<CurrencyModel>> getCurrencyList(@Path("date") String date);
 }

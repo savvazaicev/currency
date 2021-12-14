@@ -1,28 +1,32 @@
-import 'package:currency/data/currency/currency.dart';
+import 'package:currency/data/currency/currency_model.dart';
+import 'package:currency/data/currency/currency_remote_data_source.dart';
+import 'package:currency/domain/currency/entities/currency.dart';
+import 'package:currency/domain/currency/repositories/currency_repository.dart';
 import 'package:currency/network/currency/rest_client.dart';
-import 'package:dio/dio.dart';
-import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 
 class CurrencyRepository implements BaseCurrencyRepository {
-  Future<List<Currency>> loadCurrencies(
-      RestClient client, DateTime date) async {
-    final dateString = DateFormat("dd.MM.yyyy").format(date);
-    final logger = Logger();
+  final CurrencyRemoteDataSource remoteDataSource;
 
-    return client.getCurrencyList(dateString).catchError((Object obj) {
-      switch (obj.runtimeType) {
-        case DioError:
-          final res = (obj as DioError).response;
-          logger.e("Got error : ${res?.statusCode} -> ${res?.statusMessage}");
-          break;
-        default:
-          break;
-      }
-    });
+  CurrencyRepository(this.remoteDataSource);
+
+  Future<List<Currency>> getCurrencies(RestClient client) async {
+    final currencies =
+        await remoteDataSource.getCurrencyList(client, DateTime.now());
+
+    final yesterdayCurrencies = await remoteDataSource.getCurrencyList(
+        client, DateTime.now().add(Duration(days: -1)));
+    final currencyItems = currencies
+        .map((currency) => Currency(
+            currency,
+            yesterdayCurrencies
+                    .firstWhere(
+                        (yesterdayCurrency) =>
+                            yesterdayCurrency.curAbbreviation ==
+                            currency.curAbbreviation,
+                        orElse: () => CurrencyModel.empty())
+                    .curOfficialRate ??
+                0))
+        .toList();
+    return Future.value(currencyItems);
   }
-}
-
-abstract class BaseCurrencyRepository {
-  Future<List<Currency>> loadCurrencies(RestClient client, DateTime date);
 }
